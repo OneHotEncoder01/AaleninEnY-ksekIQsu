@@ -27,7 +27,9 @@ def time_to_int(data):
 # features from the date column for both the training and test data sets. 
 # remove all the NaN values from the 'SalePrice' column in the training data set.
 X_train = time_to_int(pd.read_csv('1_X_train.csv'))
-Y_train = time_to_int(pd.read_csv('1_Y_train.csv'))   
+Y_train = time_to_int(pd.read_csv('1_y_train.csv'))   
+X_test = time_to_int(pd.read_csv('1_X_test.csv'))
+Y_test = time_to_int(pd.read_csv('1_y_train.csv')) 
 Y_train = Y_train.iloc[9504:]
 x_train,x_valid,y_train,y_valid=train_test_split(X_train,Y_train,train_size=0.8,test_size=0.2)
 
@@ -39,7 +41,3 @@ model.fit(X_train,y_train)
 preds_valid=model.predict(x_valid)
 score_valid=mean_absolute_error(y_valid,preds_valid)
 print("MAE: ",score_valid)
-
-preds_test=model.predict(X_test)
-submission=pd.DataFrame({'Id':X_test.index,'SalePrice':preds_test})
-submission.to_csv('submission.csv',index=False)
