@@ -41,3 +41,8 @@ model.fit(X_train,y_train)
 preds_valid=model.predict(x_valid)
 score_valid=mean_absolute_error(y_valid,preds_valid)
 print("MAE: ",score_valid)
+
+preds_test=model.predict(X_test)
+submission = pd.DataFrame({'location_id': Y_test.location_id,'hour': Y_test.hour, 'day': Y_test.day,'month': Y_test.month,'year': Y_test.year,'temperature_2m': Y_test.temperature_2m, 'relative_humidity_2m': Y_test.relative_humidity_2m })
+submission.to_csv('1_sample_submission.csv',index=False)
+    
